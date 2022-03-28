@@ -7,7 +7,6 @@ import com.app.student.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,30 +16,36 @@ public class StudentService {
     @Autowired
     private StudentRepository studentRepository;
 
-    private ArrayList<Student> students = new ArrayList<>() {
-        {
-            add(new Student(1, "First student", "First student last name", 18));
-            add(new Student(2, "Second student", "Second student last name", 25));
-            add(new Student(3, "Third student", "Third student last name", 26));
-        }
-    };
-
     public ApiResponse<List<Student>> getStudents() {
-        return new ApiResponse<>(null, students);
+        return ApiResponse.<List<Student>>builder().data(studentRepository.findAll()).build();
     }
 
     public ApiResponse<List<Student>> addStudent(final Student student) {
         studentRepository.save(student);
-        students.add(student);
-        return new ApiResponse<>(null, students);
+        return getStudents();
 
     }
 
     public ApiResponse<Student> getStudent(int id) throws DataNotFoundException {
-        final Optional<Student> optionalStudent = students.stream().filter(student -> student.getId() == id).findFirst();
+        final Optional<Student> optionalStudent = studentRepository.findById(id);
         if (optionalStudent.isPresent()) {
             final Student selectedStudent = optionalStudent.get();
-            return new ApiResponse<>(null,selectedStudent);
+            return ApiResponse.<Student>builder().data(selectedStudent).build();
+        } else {
+            throw new DataNotFoundException("Student not found");
+        }
+    }
+
+    public ApiResponse<List<Student>> deleteStudent(final Student student) {
+        studentRepository.delete(student);
+        return getStudents();
+    }
+
+
+    public ApiResponse<List<Student>> deleteStudentById(final int id) {
+        if (studentRepository.findById(id).isPresent()) {
+            studentRepository.deleteById(id);
+            return getStudents();
         } else {
             throw new DataNotFoundException("Student not found");
         }

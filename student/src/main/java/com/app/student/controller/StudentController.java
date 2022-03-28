@@ -25,7 +25,7 @@ public class StudentController {
         return ResponseEntity.ok(studentService.getStudents());
     }
 
-    @RequestMapping(value = "/{id}", produces = {
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = {
             MediaType.APPLICATION_JSON_VALUE,
             MediaType.APPLICATION_XML_VALUE,
             MediaType.TEXT_XML_VALUE})
@@ -40,6 +40,23 @@ public class StudentController {
     })
     public ResponseEntity<ApiResponse<List<Student>>> addStudent(@RequestBody final Student student) {
         return ResponseEntity.ok(studentService.addStudent(student));
+    }
+
+    @DeleteMapping(produces = {
+            MediaType.APPLICATION_JSON_VALUE,
+            MediaType.TEXT_XML_VALUE,
+            MediaType.TEXT_XML_VALUE
+    })
+    public ResponseEntity<ApiResponse<List<Student>>> removeStudent(@RequestBody final Student student) {
+        return ResponseEntity.ok(studentService.deleteStudent(student));
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = {
+            MediaType.APPLICATION_JSON_VALUE,
+            MediaType.APPLICATION_XML_VALUE,
+            MediaType.TEXT_XML_VALUE})
+    public ResponseEntity<ApiResponse<List<Student>>> deleteStudentById(@PathVariable final int id) {
+        return ResponseEntity.ok(studentService.deleteStudentById(id));//new ResponseEntity<>(studentService.getStudent(id), HttpStatus.OK);
     }
 
 }
