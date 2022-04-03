@@ -18,6 +18,10 @@ Request Body
             "performance": {
                 "bestPerformance":90,
                 "lastPerformance":70
+            },
+            "guardian": {
+                "name": "GName",
+                "contactNumber": "345667"
             }
         }
 ```
@@ -41,6 +45,10 @@ Response Body
                 "id": 1,
                 "bestPerformance": 90,
                 "lastPerformance": 70
+            },
+            "guardian": {
+                "name": "GName",
+                "contactNumber": "345667"
             }
         }
     ]
@@ -73,6 +81,10 @@ Response body
                 "id": 1,
                 "bestPerformance": 90,
                 "lastPerformance": 70
+            },
+            "guardian": {
+                "name": "GName",
+                "contactNumber": "345667"
             }
         }
     ]

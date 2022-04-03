@@ -1,5 +1,6 @@
 package com.app.student.controller;
 
+import com.app.student.dto.StudentDto;
 import com.app.student.model.ApiResponse;
 import com.app.student.model.Student;
 import com.app.student.service.StudentService;
@@ -21,7 +22,7 @@ public class StudentController {
             MediaType.APPLICATION_JSON_VALUE,
             MediaType.APPLICATION_XML_VALUE,
             MediaType.TEXT_XML_VALUE})
-    public ResponseEntity<ApiResponse<List<Student>>> getStudents() {
+    public ResponseEntity<ApiResponse<List<StudentDto>>> getStudents() {
         return ResponseEntity.ok(studentService.getStudents());
     }
 
@@ -38,7 +39,7 @@ public class StudentController {
             MediaType.TEXT_XML_VALUE,
             MediaType.TEXT_XML_VALUE
     })
-    public ResponseEntity<ApiResponse<List<Student>>> addStudent(@RequestBody final Student student) {
+    public ResponseEntity<ApiResponse<List<StudentDto>>> addStudent(@RequestBody final Student student) {
         return ResponseEntity.ok(studentService.addStudent(student));
     }
 
@@ -47,7 +48,7 @@ public class StudentController {
             MediaType.TEXT_XML_VALUE,
             MediaType.TEXT_XML_VALUE
     })
-    public ResponseEntity<ApiResponse<List<Student>>> removeStudent(@RequestBody final Student student) {
+    public ResponseEntity<ApiResponse<List<StudentDto>>> removeStudent(@RequestBody final Student student) {
         return ResponseEntity.ok(studentService.deleteStudent(student));
     }
 
@@ -55,7 +56,7 @@ public class StudentController {
             MediaType.APPLICATION_JSON_VALUE,
             MediaType.APPLICATION_XML_VALUE,
             MediaType.TEXT_XML_VALUE})
-    public ResponseEntity<ApiResponse<List<Student>>> deleteStudentById(@PathVariable final int id) {
+    public ResponseEntity<ApiResponse<List<StudentDto>>> deleteStudentById(@PathVariable final int id) {
         return ResponseEntity.ok(studentService.deleteStudentById(id));//new ResponseEntity<>(studentService.getStudent(id), HttpStatus.OK);
     }
 

@@ -11,4 +11,7 @@ public class StudentDto {
     private Integer id;
     private String firstName;
     private String lastname;
+    private GuardianDto guardian;
+    private PerformanceDto performance;
+    private StudentDetailsDto studentDetails;
 }
