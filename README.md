@@ -2,6 +2,7 @@
 
 1. [Student API ](/docs/Student.md)
 2. [Performance API ](/docs/Performance.md)
+3. [Book API](/docs/Book.md)
 
 ## Performance Optimization
 
