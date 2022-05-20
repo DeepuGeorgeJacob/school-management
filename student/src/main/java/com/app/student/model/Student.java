@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -38,5 +39,10 @@ public class Student {
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "guardian_id", referencedColumnName = "id")
     private Guardian guardian;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "courses_like", joinColumns = @JoinColumn(name = "student_id"),
+            inverseJoinColumns = @JoinColumn(name = "course_id"))
+    private List<Course> courses;
 
 }

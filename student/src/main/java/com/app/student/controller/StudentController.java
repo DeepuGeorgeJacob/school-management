@@ -30,7 +30,7 @@ public class StudentController {
             MediaType.APPLICATION_JSON_VALUE,
             MediaType.APPLICATION_XML_VALUE,
             MediaType.TEXT_XML_VALUE})
-    public ResponseEntity<ApiResponse<Student>> getStudent(@PathVariable final int id) {
+    public ResponseEntity<ApiResponse<StudentDto>> getStudent(@PathVariable final int id) {
         return ResponseEntity.ok(studentService.getStudent(id));//new ResponseEntity<>(studentService.getStudent(id), HttpStatus.OK);
     }
 

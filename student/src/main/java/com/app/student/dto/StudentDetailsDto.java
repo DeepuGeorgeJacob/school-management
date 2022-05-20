@@ -8,6 +8,7 @@ import lombok.Data;
 @Data
 @Builder
 public class StudentDetailsDto {
+    private int id;
     private int age;
     private String dateOfBirth;
     private String contactNumber;

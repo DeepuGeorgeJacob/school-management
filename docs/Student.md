@@ -49,7 +49,11 @@ Response Body
             "guardian": {
                 "name": "GName",
                 "contactNumber": "345667"
-            }
+            },
+            "courses": [
+                "Chemistry",
+                "Physics"
+            ]
         }
     ]
 }
@@ -115,7 +119,11 @@ Response body
                 "id": 1,
                 "bestPerformance": 90,
                 "lastPerformance": 70
-            }
+            },
+            "courses": [
+                "Chemistry",
+                "Physics"
+            ]
         }
     ]
 }

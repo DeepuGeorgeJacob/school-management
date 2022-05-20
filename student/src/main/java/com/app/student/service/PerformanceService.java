@@ -25,7 +25,7 @@ public class PerformanceService {
                             .student(
                                     StudentDto.builder()
                                             .firstName(student.getFirstName())
-                                            .lastname(student.getLastName())
+                                            .lastName(student.getLastName())
                                             .build()
                             ).build();
                 }
