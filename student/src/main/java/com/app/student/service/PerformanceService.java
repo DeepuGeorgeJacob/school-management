@@ -3,11 +3,15 @@ package com.app.student.service;
 import com.app.student.dto.PerformanceDto;
 import com.app.student.dto.StudentDto;
 import com.app.student.model.ApiResponse;
+import com.app.student.model.Performance;
 import com.app.student.repository.PerformanceRepository;
+import com.app.student.request.PerformanceRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -31,5 +35,30 @@ public class PerformanceService {
                 }
         ).collect(Collectors.toList());
         return ApiResponse.<List<PerformanceDto>>builder().data(result).build();
+    }
+
+    @Transactional
+    public ApiResponse<Boolean> saveOrUpdatePerformance(final PerformanceRequest performanceRequest) {
+        if(performanceRequest.getPerformanceId() == null) {
+           insertPerformanceData(performanceRequest);
+        } else {
+            final Optional<Performance> performanceOptional = performanceRepository.findById(performanceRequest.getPerformanceId());
+            if (performanceOptional.isPresent()) {
+                final Performance performance = performanceOptional.get();
+                performance.setBestPerformance(performanceRequest.getBestPerformance());
+                performance.setLastPerformance(performanceRequest.getLastPerformance());
+                performanceRepository.save(performance);
+            } else {
+                insertPerformanceData(performanceRequest);
+            }
+        }
+        return ApiResponse.<Boolean>builder().data(true).build();
+    }
+
+    private void insertPerformanceData(final PerformanceRequest performanceRequest) {
+        performanceRepository.insertPerformanceData(
+                performanceRequest.getBestPerformance(),
+                performanceRequest.getLastPerformance(),
+                performanceRequest.getStudentId());
     }
 }

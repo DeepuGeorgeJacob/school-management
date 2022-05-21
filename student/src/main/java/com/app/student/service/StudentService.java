@@ -10,8 +10,7 @@ import com.app.student.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -33,11 +32,20 @@ public class StudentService {
                                     .guardian(getGuardian(guardian))
                                     .performance(getPerformance(performance))
                                     .studentDetails(getStudentDetails(studentDetails))
-                                    .courses(student.getCourses().parallelStream().map(Course::getName).collect(Collectors.toSet()))
+                                    .courses(getCourses(student))
                                     .build();
                         }
                 ).collect(Collectors.toList())
         ).build();
+    }
+
+    private Set<String> getCourses(final Student student) {
+        var courses = student.getCourses();
+        if(courses!=null) {
+            return student.getCourses().parallelStream().map(Course::getName).collect(Collectors.toSet());
+        } else {
+            return null;
+        }
     }
 
     private GuardianDto getGuardian(Guardian guardian) {
@@ -55,6 +63,7 @@ public class StudentService {
             return PerformanceDto.builder()
                     .lastPerformance(performance.getLastPerformance())
                     .bestPerformance(performance.getBestPerformance())
+                    .id(performance.getId())
                     .build();
         }
         return null;
@@ -78,7 +87,7 @@ public class StudentService {
 
     }
 
-    public ApiResponse<StudentDto> getStudent(int id) throws DataNotFoundException {
+    public ApiResponse<Map<String, StudentDto>> getStudent(int id) throws DataNotFoundException {
         final Optional<Student> optionalStudent = studentRepository.findById(id);
         if (optionalStudent.isPresent()) {
             final Student selectedStudent = optionalStudent.get();
@@ -87,14 +96,12 @@ public class StudentService {
                     id(selectedStudent.getId()).
                     firstName(selectedStudent.getFirstName()).
                     lastName(selectedStudent.getLastName()).
-                    studentDetails(StudentDetailsDto.builder().
-                            id(selectedStudentDetails.getId()).
-                            contactNumber(selectedStudentDetails.getContactNumber()).
-                            dateOfBirth(selectedStudentDetails.getDateOfBirth()).
-                            build()).
+                    studentDetails(getStudentDetails(selectedStudentDetails)).
+                    performance(getPerformance(selectedStudent.getPerformance())).
                     courses(selectedStudent.getCourses().parallelStream().map(Course::getName).collect(Collectors.toSet())).
                     build();
-            return ApiResponse.<StudentDto>builder().data(studentDto).build();
+            final Map<String, StudentDto> response = Map.of("student", studentDto);
+            return ApiResponse.<Map<String, StudentDto>>builder().data(response).build();
         } else {
             throw new DataNotFoundException("Student not found");
         }

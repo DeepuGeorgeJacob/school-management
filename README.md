@@ -1,3 +1,6 @@
+## Visual representation
+[Angular UI](https://github.com/DeepuGeorgeJacob/school-management-angular)
+
 ## API Documentation
 
 1. [Student API ](/docs/Student.md)

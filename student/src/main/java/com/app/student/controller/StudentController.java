@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/api/students")
@@ -30,7 +31,7 @@ public class StudentController {
             MediaType.APPLICATION_JSON_VALUE,
             MediaType.APPLICATION_XML_VALUE,
             MediaType.TEXT_XML_VALUE})
-    public ResponseEntity<ApiResponse<StudentDto>> getStudent(@PathVariable final int id) {
+    public ResponseEntity<ApiResponse<Map<String, StudentDto>>> getStudent(@PathVariable final int id) {
         return ResponseEntity.ok(studentService.getStudent(id));//new ResponseEntity<>(studentService.getStudent(id), HttpStatus.OK);
     }
 
