@@ -16,5 +16,5 @@ public class StudentDto {
     private GuardianDto guardian;
     private PerformanceDto performance;
     private StudentDetailsDto studentDetails;
-    private Set<String> courses;
+    private Set<CourseDto> courses;
 }

@@ -1,12 +1,11 @@
 package com.app.student.service;
 
-import com.app.student.dto.GuardianDto;
-import com.app.student.dto.PerformanceDto;
-import com.app.student.dto.StudentDetailsDto;
-import com.app.student.dto.StudentDto;
+import com.app.student.dto.*;
 import com.app.student.exception.DataNotFoundException;
 import com.app.student.model.*;
+import com.app.student.repository.CourseRepository;
 import com.app.student.repository.StudentRepository;
+import com.app.student.request.StudentRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +17,9 @@ public class StudentService {
 
     @Autowired
     private StudentRepository studentRepository;
+
+    @Autowired
+    private CourseRepository courseRepository;
 
     public ApiResponse<List<StudentDto>> getStudents() {
         return ApiResponse.<List<StudentDto>>builder().data(studentRepository.findAll().parallelStream().map(
@@ -39,10 +41,10 @@ public class StudentService {
         ).build();
     }
 
-    private Set<String> getCourses(final Student student) {
+    private Set<CourseDto> getCourses(final Student student) {
         var courses = student.getCourses();
-        if(courses!=null) {
-            return student.getCourses().parallelStream().map(Course::getName).collect(Collectors.toSet());
+        if (courses != null) {
+            return student.getCourses().parallelStream().map(course -> new CourseDto(course.getId(), course.getName())).collect(Collectors.toSet());
         } else {
             return null;
         }
@@ -98,7 +100,9 @@ public class StudentService {
                     lastName(selectedStudent.getLastName()).
                     studentDetails(getStudentDetails(selectedStudentDetails)).
                     performance(getPerformance(selectedStudent.getPerformance())).
-                    courses(selectedStudent.getCourses().parallelStream().map(Course::getName).collect(Collectors.toSet())).
+                    courses(selectedStudent.getCourses().parallelStream().map(course -> new CourseDto(
+                            course.getId(),
+                            course.getName())).collect(Collectors.toSet())).
                     build();
             final Map<String, StudentDto> response = Map.of("student", studentDto);
             return ApiResponse.<Map<String, StudentDto>>builder().data(response).build();
@@ -122,4 +126,15 @@ public class StudentService {
         }
     }
 
+    public ApiResponse<Boolean> updateStudent(StudentRequest studentRequest) {
+        final Optional<Student> studentOptional = studentRepository.findById(studentRequest.getId());
+        if (studentOptional.isPresent()) {
+            final Student student = studentOptional.get();
+            student.setCourses(courseRepository.findAllById(studentRequest.getCourses()));
+            studentRepository.save(student);
+            return ApiResponse.<Boolean>builder().data(true).build();
+
+        }
+        return ApiResponse.<Boolean>builder().data(false).build();
+    }
 }

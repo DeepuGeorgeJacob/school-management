@@ -3,6 +3,7 @@ package com.app.student.controller;
 import com.app.student.dto.StudentDto;
 import com.app.student.model.ApiResponse;
 import com.app.student.model.Student;
+import com.app.student.request.StudentRequest;
 import com.app.student.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -32,7 +33,7 @@ public class StudentController {
             MediaType.APPLICATION_XML_VALUE,
             MediaType.TEXT_XML_VALUE})
     public ResponseEntity<ApiResponse<Map<String, StudentDto>>> getStudent(@PathVariable final int id) {
-        return ResponseEntity.ok(studentService.getStudent(id));//new ResponseEntity<>(studentService.getStudent(id), HttpStatus.OK);
+        return ResponseEntity.ok(studentService.getStudent(id));
     }
 
     @PostMapping(produces = {
@@ -59,6 +60,14 @@ public class StudentController {
             MediaType.TEXT_XML_VALUE})
     public ResponseEntity<ApiResponse<List<StudentDto>>> deleteStudentById(@PathVariable final int id) {
         return ResponseEntity.ok(studentService.deleteStudentById(id));//new ResponseEntity<>(studentService.getStudent(id), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/update", method = RequestMethod.POST, produces = {
+            MediaType.APPLICATION_JSON_VALUE,
+            MediaType.APPLICATION_XML_VALUE,
+            MediaType.TEXT_XML_VALUE})
+    public ResponseEntity<ApiResponse<Boolean>> updateStudent(@RequestBody StudentRequest studentRequest) {
+        return ResponseEntity.ok(studentService.updateStudent(studentRequest));
     }
 
 }
