@@ -1,3 +1,4 @@
 rootProject.name = 'school-management'
 include ':student'
+include 'scheduler'
 
