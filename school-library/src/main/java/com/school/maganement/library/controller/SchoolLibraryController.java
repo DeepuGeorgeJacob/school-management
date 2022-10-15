@@ -1,6 +1,7 @@
 package com.school.maganement.library.controller;
 
 import com.common.response.ApiResponse;
+import com.school.maganement.library.dto.MembershipDto;
 import com.school.maganement.library.model.Membership;
 import com.school.maganement.library.request.MembershipRequest;
 import com.school.maganement.library.service.MembershipService;
@@ -15,12 +16,12 @@ public class SchoolLibraryController {
     private MembershipService membershipService;
 
     @PostMapping
-    public ResponseEntity<ApiResponse<Membership>> createMembership(@RequestBody final MembershipRequest membershipRequest) {
+    public ResponseEntity<ApiResponse<MembershipDto>> createMembership(@RequestBody final MembershipRequest membershipRequest) {
        return membershipService.createMembership(membershipRequest);
     }
 
     @GetMapping(value = "{id}")
-    public ResponseEntity<ApiResponse<Membership>>  getStudentMembership(@PathVariable int id) {
+    public ResponseEntity<ApiResponse<MembershipDto>>  getStudentMembership(@PathVariable int id) {
         return membershipService.getLibraryMembership(id);
     }
 
