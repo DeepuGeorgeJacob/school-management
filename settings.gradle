@@ -1,4 +1,6 @@
 rootProject.name = 'school-management'
 include ':student'
 include 'scheduler'
+include 'school-library'
+include 'common-lib'
 

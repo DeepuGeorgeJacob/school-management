@@ -1,7 +1,7 @@
 package com.app.student.controller;
 
 import com.app.student.dto.CourseDto;
-import com.app.student.model.ApiResponse;
+import com.common.response.ApiResponse;
 import com.app.student.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;

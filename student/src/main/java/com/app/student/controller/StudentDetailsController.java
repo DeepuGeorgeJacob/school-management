@@ -1,6 +1,6 @@
 package com.app.student.controller;
 
-import com.app.student.model.ApiResponse;
+import com.common.response.ApiResponse;
 import com.app.student.request.StudentDetailsRequest;
 import com.app.student.service.StudentDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;

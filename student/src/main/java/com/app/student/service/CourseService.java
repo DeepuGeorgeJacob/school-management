@@ -1,7 +1,7 @@
 package com.app.student.service;
 
 import com.app.student.dto.CourseDto;
-import com.app.student.model.ApiResponse;
+import com.common.response.ApiResponse;
 import com.app.student.model.Course;
 import com.app.student.repository.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;

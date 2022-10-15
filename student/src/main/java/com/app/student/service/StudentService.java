@@ -1,11 +1,12 @@
 package com.app.student.service;
 
 import com.app.student.dto.*;
-import com.app.student.exception.DataNotFoundException;
 import com.app.student.model.*;
 import com.app.student.repository.CourseRepository;
 import com.app.student.repository.StudentRepository;
 import com.app.student.request.StudentRequest;
+import com.common.exception.handler.DataNotFoundException;
+import com.common.response.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

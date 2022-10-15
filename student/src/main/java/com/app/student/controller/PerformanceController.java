@@ -1,9 +1,7 @@
 package com.app.student.controller;
 
 import com.app.student.dto.PerformanceDto;
-import com.app.student.model.ApiResponse;
-import com.app.student.model.Performance;
-import com.app.student.model.Student;
+import com.common.response.ApiResponse;
 import com.app.student.request.PerformanceRequest;
 import com.app.student.service.PerformanceService;
 import org.springframework.beans.factory.annotation.Autowired;

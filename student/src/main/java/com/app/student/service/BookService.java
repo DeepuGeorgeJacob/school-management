@@ -1,8 +1,8 @@
 package com.app.student.service;
 
 import com.app.student.dto.BookDto;
-import com.app.student.exception.DataNotFoundException;
-import com.app.student.model.ApiResponse;
+import com.common.exception.handler.DataNotFoundException;
+import com.common.response.ApiResponse;
 import com.app.student.model.Book;
 import com.app.student.model.BookId;
 import com.app.student.repository.BookRepository;

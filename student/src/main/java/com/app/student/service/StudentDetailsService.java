@@ -1,6 +1,6 @@
 package com.app.student.service;
 
-import com.app.student.model.ApiResponse;
+import com.common.response.ApiResponse;
 import com.app.student.model.StudentDetails;
 import com.app.student.repository.StudentDetailsRepository;
 import com.app.student.request.StudentDetailsRequest;

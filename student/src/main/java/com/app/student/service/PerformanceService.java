@@ -2,7 +2,7 @@ package com.app.student.service;
 
 import com.app.student.dto.PerformanceDto;
 import com.app.student.dto.StudentDto;
-import com.app.student.model.ApiResponse;
+import com.common.response.ApiResponse;
 import com.app.student.model.Performance;
 import com.app.student.repository.PerformanceRepository;
 import com.app.student.request.PerformanceRequest;

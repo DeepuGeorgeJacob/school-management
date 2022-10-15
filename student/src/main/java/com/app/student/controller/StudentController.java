@@ -1,7 +1,7 @@
 package com.app.student.controller;
 
 import com.app.student.dto.StudentDto;
-import com.app.student.model.ApiResponse;
+import com.common.response.ApiResponse;
 import com.app.student.model.Student;
 import com.app.student.request.StudentRequest;
 import com.app.student.service.StudentService;

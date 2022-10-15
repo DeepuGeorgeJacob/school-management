@@ -7,31 +7,31 @@ plugins {
 version = '0.0.1-SNAPSHOT'
 
 bootJar {
-    enabled = true
+    enabled = false
+}
+
+
+repositories {
+    mavenCentral()
 }
 
 dependencies {
-
-    implementation project(":common-lib")
-
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    //H2
-    runtimeOnly 'com.h2database:h2'
 
-    // Flyway database migration
-    implementation 'org.flywaydb:flyway-core'
+    implementation 'org.projectlombok:lombok'
+    compileOnly 'org.projectlombok:lombok'
 
     //XML
     implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml'
     implementation 'org.glassfish.jaxb:jaxb-runtime'
     implementation 'javax.xml.bind:jaxb-api'
 
-    compileOnly 'org.projectlombok:lombok'
-    annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    annotationProcessor 'org.projectlombok:lombok'
 }
 
-tasks.named('test') {
+test {
     useJUnitPlatform()
 }
