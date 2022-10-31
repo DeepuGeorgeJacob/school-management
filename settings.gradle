@@ -4,4 +4,5 @@ include 'scheduler'
 include 'school-library'
 include 'common-lib'
 include 'eureka-server'
+include 'api-gateway'
 
