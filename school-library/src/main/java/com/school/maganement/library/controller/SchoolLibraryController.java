@@ -2,7 +2,6 @@ package com.school.maganement.library.controller;
 
 import com.common.response.ApiResponse;
 import com.school.maganement.library.dto.MembershipDto;
-import com.school.maganement.library.model.Membership;
 import com.school.maganement.library.request.MembershipRequest;
 import com.school.maganement.library.service.MembershipService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +19,14 @@ public class SchoolLibraryController {
        return membershipService.createMembership(membershipRequest);
     }
 
-    @GetMapping(value = "{id}")
-    public ResponseEntity<ApiResponse<MembershipDto>>  getStudentMembership(@PathVariable int id) {
-        return membershipService.getLibraryMembership(id);
+    @GetMapping(value = "/webclient/{id}")
+    public ResponseEntity<ApiResponse<MembershipDto>>  getStudentMembershipWebClient(@PathVariable int id) {
+        return membershipService.getLibraryMembershipWebClient(id);
+    }
+
+    @GetMapping(value = "/feign/{id}")
+    public ResponseEntity<ApiResponse<MembershipDto>>  getStudentMembershipFeign(@PathVariable int id) {
+        return membershipService.getLibraryMembershipFeign(id);
     }
 
 }

@@ -4,9 +4,8 @@ import com.common.exception.handler.DataNotFoundException;
 import com.common.exception.handler.DataPresentException;
 import com.common.response.ApiResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
 import com.school.maganement.library.dto.MembershipDto;
-import com.school.maganement.library.dto.StudentDto;
+import com.school.maganement.library.feign.client.StudentFeignClient;
 import com.school.maganement.library.model.Membership;
 import com.school.maganement.library.repository.MembershipRepository;
 import com.school.maganement.library.request.MembershipRequest;
@@ -18,8 +17,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
-
-import java.lang.reflect.Type;
 import java.util.Date;
 import java.util.Map;
 import java.util.Objects;
@@ -34,6 +31,9 @@ public class MembershipService {
 
     @Autowired
     private WebClient webClient;
+
+    @Autowired
+    private StudentFeignClient studentFeignClient;
 
     public ResponseEntity<ApiResponse<MembershipDto>> createMembership(final MembershipRequest membershipRequest) {
         var presentMemberShip = membershipRepository.findByStudentId(membershipRequest.getStudentId());
@@ -57,7 +57,7 @@ public class MembershipService {
 
     }
 
-    public ResponseEntity<ApiResponse<MembershipDto>> getLibraryMembership(int id) {
+    public ResponseEntity<ApiResponse<MembershipDto>> getLibraryMembershipWebClient(int id) {
         var presentMemberShip = membershipRepository.findByStudentId(id);
         if (presentMemberShip != null) {
             MembershipDto membershipDto = new MembershipDto(
@@ -65,6 +65,24 @@ public class MembershipService {
                     presentMemberShip.getStudentId(),
                     presentMemberShip.getCreatedDate(),
                     getStudentDetails(id)
+            );
+            var response = ApiResponse.<MembershipDto>builder().data(membershipDto).build();
+            return ResponseEntity.ok(response);
+        } else {
+            throw new DataNotFoundException("Student has no membership");
+        }
+
+    }
+
+    public ResponseEntity<ApiResponse<MembershipDto>> getLibraryMembershipFeign(int id) {
+        var presentMemberShip = membershipRepository.findByStudentId(id);
+        if (presentMemberShip != null) {
+            var studentDetails = studentFeignClient.getStudentById(id).getData().get("student");
+            MembershipDto membershipDto = new MembershipDto(
+                    presentMemberShip.getMembershipNumber(),
+                    presentMemberShip.getStudentId(),
+                    presentMemberShip.getCreatedDate(),
+                    studentDetails
             );
             var response = ApiResponse.<MembershipDto>builder().data(membershipDto).build();
             return ResponseEntity.ok(response);
