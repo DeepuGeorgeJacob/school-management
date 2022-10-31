@@ -1,4 +1,4 @@
-package com.school.management.apigateway;
+package com.school.management;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
