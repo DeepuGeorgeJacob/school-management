@@ -24,6 +24,9 @@ dependencies {
     // feign
     implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
 
+    // Client side load balancer
+    implementation 'org.springframework.cloud:spring-cloud-starter-loadbalancer'
+
     //H2
     runtimeOnly 'com.h2database:h2'
 

@@ -94,6 +94,7 @@ public class StudentService {
     }
 
     public ApiResponse<Map<String, StudentDto>> getStudent(int id) throws DataNotFoundException {
+        System.out.println("getStudent "+id);
         final Optional<Student> optionalStudent = studentRepository.findById(id);
         if (optionalStudent.isPresent()) {
             final Student selectedStudent = optionalStudent.get();
