@@ -23,6 +23,7 @@ dependencyManagement {
     }
 }
 
+/*
 test {
     useJUnitPlatform()
-}
+}*/

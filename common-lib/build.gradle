@@ -32,6 +32,7 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
 }
 
+/*
 test {
     useJUnitPlatform()
-}
+}*/
