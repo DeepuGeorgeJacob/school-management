@@ -70,13 +70,37 @@ cd student
 docker build -t student:0.1 .
 cd ..
 
+echo "Create network"
+
+docker network rm microservice_network
+
+docker network create microservice_network
+
 echo "Starting micro services"
 
-docker run -p 8761:8761 -d eureka-server:0.1
-docker run -p 9090:9090 -d -e EUREKA_SERVER='http://172.17.0.2:8761/eureka/' api-gateway:0.1
-docker run -p 7000:7000 -d -e EUREKA_SERVER='http://172.17.0.2:8761/eureka/' scheduler:0.1
-docker run -p 3001:3001 -d -e EUREKA_SERVER='http://172.17.0.2:8761/eureka/' school-library:0.1
-docker run -p 4000:4000 -d -e EUREKA_SERVER='http://172.17.0.2:8761/eureka/' student:0.1
+# Docker run with enviornment variable
+
+# docker run -p 8761:8761 -d --name eureka-server eureka-server:0.1
+# docker run -p 9090:9090 -d -e EUREKA_SERVER='http://172.17.0.2:8761/eureka/' --name api-gateway api-gateway:0.1
+# docker run -p 7000:7000 -d -e EUREKA_SERVER='http://172.17.0.2:8761/eureka/' --name scheduler scheduler:0.1
+# docker run -p 3001:3001 -d -e EUREKA_SERVER='http://172.17.0.2:8761/eureka/' --name school-library school-library:0.1
+# docker run -p 4000:4000 -d -e EUREKA_SERVER='http://172.17.0.2:8761/eureka/' --name student student:0.1
+
+# Docker run without enviornment variable (ENV set in docker file)
+
+# docker run -p 8761:8761 -d --name eureka-server eureka-server:0.1
+# docker run -p 9090:9090 -d --name api-gateway api-gateway:0.1
+# docker run -p 7000:7000 -d --name scheduler scheduler:0.1
+# docker run -p 3001:3001 -d --name school-library school-library:0.1
+# docker run -p 4000:4000 -d --name student student:0.1
+
+# Docker run with Network (No need to expose any ports that you want to access in by your system)
+
+docker run -p 8761:8761 -d --name eureka-server --network microservice_network eureka-server:0.1
+docker run -p 9090:9090 -d --name api-gateway --network microservice_network api-gateway:0.1
+docker run -d --name scheduler --network microservice_network scheduler:0.1
+docker run -d --name school-library --network microservice_network school-library:0.1
+docker run -d --name student --network microservice_network student:0.1
 
 
 

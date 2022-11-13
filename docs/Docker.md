@@ -33,3 +33,5 @@
 ## Sample command to run docker images
 1. Eureka server `docker run -p 8761:8761 eureka-server:0.1`
 2. Api gateway `docker run -p 9090:9090 api-gateway:0.1`
+3. Inspect and find ip address of a container `docker container inspect <container name>`
+
