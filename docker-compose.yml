@@ -1,0 +1,51 @@
+version: '3.8'
+services:
+
+  eureka-server:
+    build: ./eureka-server
+    container_name: eureka-server
+    ports:
+      - '8761:8761'
+    networks:
+      - spring-cloud-network
+
+  api-gateway:
+    build: ./api-gateway
+    container_name: api-gateway
+    ports:
+      - '9090:9090'
+    networks:
+      - spring-cloud-network
+    depends_on:
+      - eureka-server
+
+  scheduler:
+    build: ./scheduler
+    container_name: scheduler
+    networks:
+      - spring-cloud-network
+    depends_on:
+      - eureka-server
+
+  school-library:
+    build: ./school-library
+    container_name: school-library
+    networks:
+      - spring-cloud-network
+    depends_on:
+      - eureka-server
+
+  student:
+    build: ./student
+    container_name: student
+    networks:
+      - spring-cloud-network
+    depends_on:
+      - eureka-server
+
+networks:
+  spring-cloud-network:
+    driver: bridge
+
+
+

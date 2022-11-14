@@ -14,7 +14,7 @@
 ## Cloud build
 
 1. [Docker](/docs/Docker.md)
-2. [Shell Script](/build.sh)
+2. [Shell Script](/scrips/build.sh)
 
 ## Other
 
