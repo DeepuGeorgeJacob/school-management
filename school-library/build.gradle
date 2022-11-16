@@ -28,10 +28,10 @@ dependencies {
     implementation 'org.springframework.cloud:spring-cloud-starter-loadbalancer'
 
     //H2
-    runtimeOnly 'com.h2database:h2'
+    //runtimeOnly 'com.h2database:h2'
 
     //Postgres
-    //runtimeOnly 'org.postgresql:postgresql'
+    runtimeOnly 'org.postgresql:postgresql'
 
     // Flyway database migration
     implementation 'org.flywaydb:flyway-core'

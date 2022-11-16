@@ -21,7 +21,7 @@ dependencies {
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
 
     //H2
-    runtimeOnly 'com.h2database:h2'
+    //runtimeOnly 'com.h2database:h2'
 
     // Flyway database migration
     implementation 'org.flywaydb:flyway-core'
@@ -30,6 +30,9 @@ dependencies {
     implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml'
     implementation 'org.glassfish.jaxb:jaxb-runtime'
     implementation 'javax.xml.bind:jaxb-api'
+
+    //Postgres
+    runtimeOnly 'org.postgresql:postgresql'
 
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'

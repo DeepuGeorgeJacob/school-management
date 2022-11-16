@@ -1,6 +1,20 @@
 version: '3.8'
 services:
 
+  postgres:
+    image: postgres:15.1
+    container_name: postgres
+    environment:
+      - POSTGRES_PASSWORD=secretaryship
+      - POSTGRES_USERNAME=postgres
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    volumes:
+      - .:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+    networks:
+      - spring-cloud-network
+
   eureka-server:
     build: ./eureka-server
     container_name: eureka-server
@@ -8,6 +22,8 @@ services:
       - '8761:8761'
     networks:
       - spring-cloud-network
+    depends_on:
+      - postgres
 
   api-gateway:
     build: ./api-gateway
@@ -30,6 +46,11 @@ services:
   school-library:
     build: ./school-library
     container_name: school-library
+    environment:
+      - DB_NAME=postgres
+      - DB_PASSPORT=secretaryship
+      - DB_URL=postgres
+      - DB_PORT=5432
     networks:
       - spring-cloud-network
     depends_on:
@@ -40,6 +61,11 @@ services:
     container_name: student
     networks:
       - spring-cloud-network
+    environment:
+      - DB_NAME=postgres
+      - DB_PASSPORT=secretaryship
+      - DB_URL=postgres
+      - DB_PORT=5432
     depends_on:
       - eureka-server
 
