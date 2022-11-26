@@ -63,7 +63,7 @@ services:
       - spring-cloud-network
     environment:
       - DB_NAME=postgres
-      - DB_PASSPORT=secretaryship
+      - DB_PASSWORD=secretaryship
       - DB_URL=postgres
       - DB_PORT=5432
     depends_on:

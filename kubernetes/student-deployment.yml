@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: student-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: student
+  template:
+    metadata:
+      labels:
+        app: student
+    spec:
+      containers:
+        - name: student
+          image:  deepugeorgejacob/student:0.1
+          env:
+            - name: EUREKA_SERVER
+              value: http://eureka-server-service.default:8761/eureka/
+            - name: DB_NAME
+              value: postgres
+            - name: DB_PASSWORD
+              value: secretaryship
+            - name: DB_URL
+              value: postgres-service.default
+            - name: DB_PORT
+              value: "5432"

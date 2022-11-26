@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: school-library-service
+spec:
+  selector:
+    app: school-library
+  ports:
+    - protocol: TCP
+      port: 3001
+      targetPort: 3001
+  type: ClusterIP
