@@ -69,3 +69,10 @@ See the deployment file created for the project
 <br>
 [Script to run all pods to cluster](../scrips/kubernetes.sh)
 
+## Delete based on label
+`kubectl delete <kind of resources in array> -l <key>=<value>`
+<br>
+`kubectl delete deployments,service -l <key>=<value>`
+<br>
+eg:- `kubectl delete deployments,services -l group=school-management`
+
