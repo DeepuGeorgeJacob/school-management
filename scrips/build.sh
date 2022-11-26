@@ -14,6 +14,3 @@ chmod +x build_scheduler.sh
 
 chmod +x build_school_library.sh
 ./build_school_library.sh
-
-chmod +x build_student.sh
-./build_student.sh
