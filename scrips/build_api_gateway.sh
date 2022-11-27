@@ -9,4 +9,4 @@ echo "========Building api gateway service======="
 ./gradlew api-gateway:build
 echo "========Api gateway build completed======="
 
-docker build -t api-gateway:0.1 api-gateway
+# docker build -t api-gateway:0.1 api-gateway

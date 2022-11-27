@@ -9,4 +9,4 @@ echo "========Building Student service======="
 ./gradlew student:build
 echo "========Student service build completed======="
 
-docker build -t student:0.1 student
+#docker build -t student:0.1 student

@@ -102,9 +102,3 @@ docker run -p 9090:9090 -d --name api-gateway --network microservice_network api
 docker run -d --name scheduler --network microservice_network scheduler:0.1
 docker run -d --name school-library --network microservice_network school-library:0.1
 docker run -d --name student --network microservice_network student:0.1
-
-
-
-
-
-

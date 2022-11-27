@@ -1,3 +1,4 @@
+/*
 package com.school.management.student.config;
 
 import org.springframework.context.annotation.Configuration;
@@ -12,3 +13,4 @@ public class WebConfiguration implements WebMvcConfigurer {
         registry.addMapping("/**").allowedMethods("*");
     }
 }
+*/

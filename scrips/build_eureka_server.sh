@@ -9,4 +9,4 @@ echo "========Building eureka server======="
 ./gradlew eureka-server:build
 echo "========Eureka server build completed======="
 
-docker build -t eureka-server:0.1 eureka-server
+# docker build -t eureka-server:0.1 eureka-server
