@@ -17,14 +17,14 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(DataNotFoundException.class)
     public ResponseEntity<Object> handleDataNotFoundException(final DataNotFoundException dataNotFoundException) {
-        final ApiResponse<Object> dataConflictResponse = ApiResponse.builder().errorMessage(dataNotFoundException.getExceptionMessage()).build();
-        return new ResponseEntity<>(dataConflictResponse, HttpStatus.CONFLICT);
+        final ApiResponse<Object> dataNotFoundResponse = ApiResponse.builder().errorMessage(dataNotFoundException.getExceptionMessage()).build();
+        return new ResponseEntity<>(dataNotFoundResponse, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(DataPresentException.class)
     public ResponseEntity<Object> handleDataNotFoundException(final DataPresentException dataNotFoundException) {
-        final ApiResponse<Object> dataNotFoundResponse = ApiResponse.builder().errorMessage(dataNotFoundException.getExceptionMessage()).build();
-        return new ResponseEntity<>(dataNotFoundResponse, HttpStatus.);
+        final ApiResponse<Object> dataConflictResponse = ApiResponse.builder().errorMessage(dataNotFoundException.getExceptionMessage()).build();
+        return new ResponseEntity<>(dataConflictResponse, HttpStatus.CONFLICT);
     }
 
 

@@ -23,7 +23,7 @@ public class GatewayFilter implements GlobalFilter {
 
         return chain.filter(exchange).then(Mono.fromRunnable(() -> {
             // Post filter
-            logger.info("Response code "+exchange.getResponse().getRawStatusCode());
+            logger.info("Response code "+exchange.getResponse().getStatusCode());
         }));
     }
 }
