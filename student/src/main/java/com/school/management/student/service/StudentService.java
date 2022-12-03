@@ -10,6 +10,7 @@ import com.school.management.student.repository.StudentRepository;
 import com.school.management.student.request.StudentRequest;
 import com.school.management.common.exception.handler.DataNotFoundException;
 import com.school.management.common.response.ApiResponse;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +27,7 @@ public class StudentService {
     private CourseRepository courseRepository;
 
     public ApiResponse<List<StudentDto>> getStudents() {
-        return ApiResponse.<List<StudentDto>>builder().data(studentRepository.findAll().parallelStream().map(
+        return ApiResponse.<List<StudentDto>>builder().data(studentRepository.findAll().stream().map(
                         student -> {
                             var guardian = student.getGuardian();
                             var performance = student.getPerformance();

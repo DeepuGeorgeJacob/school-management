@@ -32,7 +32,7 @@ dependencies {
     //XML
     implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml'
     implementation 'org.glassfish.jaxb:jaxb-runtime'
-    implementation 'javax.xml.bind:jaxb-api'
+    implementation 'javax.xml.bind:jaxb-api-parent:2.3.1'
 
     //Postgres
     runtimeOnly 'org.postgresql:postgresql'
