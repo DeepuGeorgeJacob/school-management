@@ -4,7 +4,10 @@ plugins {
     id 'java'
 }
 
+group = "$applicationGroup"
 version = '0.0.1-SNAPSHOT'
+sourceCompatibility = "$javaVersion"
+
 
 bootJar {
     enabled = true
@@ -33,6 +36,7 @@ dependencies {
 
     //Postgres
     runtimeOnly 'org.postgresql:postgresql'
+
 
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'

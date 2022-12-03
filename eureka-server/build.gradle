@@ -4,13 +4,9 @@ plugins {
 	id 'java'
 }
 
+group = "$applicationGroup"
 version = '0.0.1-SNAPSHOT'
-
-repositories {
-	mavenCentral()
-}
-
-
+sourceCompatibility = "$javaVersion"
 
 dependencies {
 	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server'

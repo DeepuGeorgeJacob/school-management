@@ -9,17 +9,17 @@ import com.school.management.library.feign.client.StudentFeignClient;
 import com.school.management.library.model.Membership;
 import com.school.management.library.repository.MembershipRepository;
 import com.school.management.library.request.MembershipRequest;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
-import java.util.Date;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 @Service
 public class MembershipService {
@@ -33,7 +33,7 @@ public class MembershipService {
     private WebClient webClient;
 
     @Autowired
-    private StudentFeignClient studentFeignClient;
+    private StudentService studentService;
 
     public ResponseEntity<ApiResponse<MembershipDto>> createMembership(final MembershipRequest membershipRequest) {
         var presentMemberShip = membershipRepository.findByStudentId(membershipRequest.getStudentId());
@@ -77,7 +77,7 @@ public class MembershipService {
     public ResponseEntity<ApiResponse<MembershipDto>> getLibraryMembershipFeign(int id) {
         var presentMemberShip = membershipRepository.findByStudentId(id);
         if (presentMemberShip != null) {
-            var studentDetails = studentFeignClient.getStudentById(id).getData().get("student");
+            var studentDetails = studentService.getStudentById(id);
             MembershipDto membershipDto = new MembershipDto(
                     presentMemberShip.getMembershipNumber(),
                     presentMemberShip.getStudentId(),
@@ -94,7 +94,7 @@ public class MembershipService {
 
     private Object getStudentDetails(final int studentId) {
         final Mono<ResponseEntity<Map>> responseEntity = webClient.get().uri("api/students/" + studentId).retrieve().toEntity(Map.class);
-        ObjectMapper objectMapper = new ObjectMapper();
+        final ObjectMapper objectMapper = new ObjectMapper();
         return objectMapper.convertValue(Objects.requireNonNull(Objects.requireNonNull(responseEntity.block()).getBody()).get("data"), Object.class);
     }
 }

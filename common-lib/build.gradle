@@ -4,7 +4,9 @@ plugins {
     id 'java'
 }
 
+group = "$applicationGroup"
 version = '0.0.1-SNAPSHOT'
+sourceCompatibility = "$javaVersion"
 
 bootJar {
     enabled = false

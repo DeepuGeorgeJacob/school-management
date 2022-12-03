@@ -4,7 +4,9 @@ plugins {
     id 'java'
 }
 
+group = "$applicationGroup"
 version = '0.0.1-SNAPSHOT'
+sourceCompatibility = "$javaVersion"
 
 bootJar {
     enabled = true
@@ -40,6 +42,11 @@ dependencies {
     implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml'
     implementation 'org.glassfish.jaxb:jaxb-runtime'
     implementation 'javax.xml.bind:jaxb-api'
+
+    // Resilience4j circuit breaker
+    implementation 'org.springframework.cloud:spring-cloud-starter-circuitbreaker-resilience4j'
+    // Actuator for health check
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
 
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'

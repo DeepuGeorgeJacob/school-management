@@ -5,10 +5,9 @@ plugins {
 }
 ext {
     set('springCloudVersion', "2021.0.4")
+    set('applicationGroup','com.school.management')
+    set('javaVersion','11')
 }
-
-group = 'com.app'
-sourceCompatibility = '11'
 
 configurations {
     compileOnly {
@@ -17,7 +16,6 @@ configurations {
 }
 
 allprojects {
-
     repositories {
         mavenCentral()
     }
