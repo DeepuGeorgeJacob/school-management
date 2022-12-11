@@ -1,6 +1,11 @@
 ## Visual representation
 [Angular UI](https://github.com/DeepuGeorgeJacob/school-management-angular)
 
+
+## Security in API-Gateway
+
+1. [In-memory user security](/docs/Security.md)
+
 ## API Documentation
 
 1. [Student API ](/docs/Student.md)
@@ -18,6 +23,6 @@
 3. [Shell Script](/scrips/build_and_create_container.sh)
 
 ## Other
-1. [Version updation nopte](/docs/VersionUpdate.md)
+1. [Version update note](/docs/VersionUpdate.md)
 2. [Annotation](/docs/Annotations.md)
 3. [Spring help document](/docs/HELP.md)

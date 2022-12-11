@@ -10,9 +10,7 @@ sourceCompatibility = "$javaVersion"
 
 
 dependencies {
-	implementation project(":security:in-memory-user-security")
-	implementation 'org.springframework.cloud:spring-cloud-starter-gateway'
-	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
