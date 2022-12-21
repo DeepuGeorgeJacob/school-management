@@ -26,3 +26,4 @@
 1. [Version update note](/docs/VersionUpdate.md)
 2. [Annotation](/docs/Annotations.md)
 3. [Spring help document](/docs/HELP.md)
+4. [Resilience4j](/docs/pdf/CircuiteBreaker.pdf)
