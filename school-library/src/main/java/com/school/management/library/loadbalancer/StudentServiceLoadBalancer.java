@@ -1,3 +1,4 @@
+/*
 package com.school.management.library.loadbalancer;
 
 import feign.Feign;
@@ -14,3 +15,4 @@ public class StudentServiceLoadBalancer {
         return Feign.builder();
     }
 }
+*/

@@ -11,6 +11,8 @@ import com.school.management.student.request.StudentRequest;
 import com.school.management.common.exception.handler.DataNotFoundException;
 import com.school.management.common.response.ApiResponse;
 import jakarta.transaction.Transactional;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +21,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class StudentService {
-
+    private static final Logger logger = LoggerFactory.getLogger(StudentService.class);
     @Autowired
     private StudentRepository studentRepository;
 
@@ -95,7 +97,7 @@ public class StudentService {
     }
 
     public ApiResponse<Map<String, StudentDto>> getStudent(int id) throws DataNotFoundException {
-        System.out.println("getStudent "+id);
+        logger.info("Getting student by id ",id);
         final Optional<Student> optionalStudent = studentRepository.findById(id);
         if (optionalStudent.isPresent()) {
             final Student selectedStudent = optionalStudent.get();

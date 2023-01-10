@@ -11,9 +11,15 @@ sourceCompatibility = "$javaVersion"
 
 dependencies {
 	//implementation project(":security:in-memory-user-security")
-	implementation project(":security:jdbc-user-security")
+	//implementation project(":security:jdbc-user-security")
 	implementation 'org.springframework.cloud:spring-cloud-starter-gateway'
 	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+
+	// Tracing
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'io.micrometer:micrometer-tracing-bridge-brave'
+	implementation 'io.zipkin.reporter2:zipkin-reporter-brave'
+
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 

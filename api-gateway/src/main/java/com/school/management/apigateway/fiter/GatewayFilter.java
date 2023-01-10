@@ -17,6 +17,7 @@ public class GatewayFilter implements GlobalFilter {
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         final ServerHttpRequest serverHttpRequest = exchange.getRequest();
         logger.info("Authorization = " + serverHttpRequest.getHeaders().getFirst("Authorization"));
+        logger.info("URL = " + serverHttpRequest.getURI().getPath());
 
         // Pre-filter
         //return chain.filter(exchange);

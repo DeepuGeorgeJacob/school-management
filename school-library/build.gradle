@@ -27,7 +27,7 @@ dependencies {
     implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
 
     // Client side load balancer
-    implementation 'org.springframework.cloud:spring-cloud-starter-loadbalancer'
+    //implementation 'org.springframework.cloud:spring-cloud-starter-loadbalancer'
 
     //H2
     //runtimeOnly 'com.h2database:h2'
@@ -47,6 +47,10 @@ dependencies {
     implementation 'org.springframework.cloud:spring-cloud-starter-circuitbreaker-resilience4j'
     // Actuator for health check
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
+
+    // Tracing
+    implementation 'io.micrometer:micrometer-tracing-bridge-brave'
+    implementation 'io.zipkin.reporter2:zipkin-reporter-brave'
 
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
