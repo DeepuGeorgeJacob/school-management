@@ -28,3 +28,6 @@
 3. [Spring help document](/docs/HELP.md)
 4. [Resilience4j](/docs/pdf/CircuiteBreaker.pdf)
 5. [Sleuth to Micrometer Tracing](https://github.com/micrometer-metrics/tracing/wiki/Spring-Cloud-Sleuth-3.1-Migration-Guide)
+
+# [Connect the Author](https://www.linkedin.com/in/deepu-george-jacob-76753358/)
+Any questions please connect/send a message to me via LinkedIn. I am available [here.](https://www.linkedin.com/in/deepu-george-jacob-76753358/)
