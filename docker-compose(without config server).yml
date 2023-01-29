@@ -25,20 +25,6 @@ services:
     depends_on:
       - postgres
 
-  config-server:
-    build: ./config-server
-    container_name: config-server
-    environment:
-      - CONFIG_FILE_PATH=/var/config-server-volume
-    ports:
-      - '8888:8888'
-    volumes:
-      - ./config-server-properties:/var/config-server-volume
-    networks:
-      - spring-cloud-network
-    depends_on:
-      - eureka-server
-
   api-gateway:
     build: ./api-gateway
     container_name: api-gateway
