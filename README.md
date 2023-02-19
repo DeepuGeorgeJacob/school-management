@@ -16,6 +16,9 @@
 
 1. [JPA Performance](/docs/JPA.md)
 
+## Feign client
+1. [How to Authenticate feign client with dynamic header while using JDBC user security?](/docs/FeignClientJDBCUserSecurity.md)
+
 ## Cloud build
 
 1. [Docker](/docs/Docker.md)

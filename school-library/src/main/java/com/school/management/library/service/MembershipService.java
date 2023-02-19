@@ -1,25 +1,26 @@
 package com.school.management.library.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.school.management.common.exception.handler.DataNotFoundException;
 import com.school.management.common.exception.handler.DataPresentException;
 import com.school.management.common.response.ApiResponse;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.school.management.library.dto.MembershipDto;
-import com.school.management.library.feign.client.StudentFeignClient;
 import com.school.management.library.model.Membership;
 import com.school.management.library.repository.MembershipRepository;
 import com.school.management.library.request.MembershipRequest;
-import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
-import java.util.*;
+import java.util.Date;
+import java.util.Map;
+import java.util.Objects;
 
 @Service
 public class MembershipService {
@@ -74,10 +75,10 @@ public class MembershipService {
 
     }
 
-    public ResponseEntity<ApiResponse<MembershipDto>> getLibraryMembershipFeign(int id) {
+    public ResponseEntity<ApiResponse<MembershipDto>> getLibraryMembershipFeign(HttpServletRequest request, int id) {
         var presentMemberShip = membershipRepository.findByStudentId(id);
         if (presentMemberShip != null) {
-            var studentDetails = studentService.getStudentById(id);
+            var studentDetails = studentService.getStudentById(getHeaders(request), id);
             MembershipDto membershipDto = new MembershipDto(
                     presentMemberShip.getMembershipNumber(),
                     presentMemberShip.getStudentId(),
@@ -96,5 +97,15 @@ public class MembershipService {
         final Mono<ResponseEntity<Map>> responseEntity = webClient.get().uri("api/students/" + studentId).retrieve().toEntity(Map.class);
         final ObjectMapper objectMapper = new ObjectMapper();
         return objectMapper.convertValue(Objects.requireNonNull(Objects.requireNonNull(responseEntity.block()).getBody()).get("data"), Object.class);
+    }
+
+    private HttpHeaders getHeaders(final HttpServletRequest httpServletRequest) {
+        var iterator = httpServletRequest.getHeaderNames().asIterator();
+        final HttpHeaders headers = new HttpHeaders();
+        while (iterator.hasNext()) {
+            var key = iterator.next();
+            headers.add(key, httpServletRequest.getHeader(key));
+        }
+        return headers;
     }
 }

@@ -5,6 +5,7 @@ import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -20,12 +21,12 @@ public class StudentService {
     }
 
     @CircuitBreaker(name = "studentService", fallbackMethod = "getStudentByIdFallbackMethod")
-    public Object getStudentById(final int id) {
+    public Object getStudentById(final HttpHeaders headers, final int id) {
         logger.info("Student feign client to get student data");
-        return studentFeignClient.getStudentById(id).getData().get("student");
+        return studentFeignClient.getStudentById(headers, id).getData().get("student");
     }
 
-    public Object getStudentByIdFallbackMethod(final int id, final Throwable th) {
+    public Object getStudentByIdFallbackMethod(final HttpHeaders headers, final int id, final Throwable th) {
         logger.error("Failed to get student details", th);
         return "Student details not found for student with id.. " + id + " No response from student server";
     }
