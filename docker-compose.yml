@@ -44,6 +44,14 @@ services:
     container_name: api-gateway
     ports:
       - '9090:9090'
+    environment:
+      - DB_PATH=postgres
+      - DB_PORT=5432
+      - POSTGRES_USERNAME:postgres
+      - DB_PASSWORD:secretaryship
+      - DB_SCHEMA:enrollment
+      - DB_NAME:postgres
+
     networks:
       - spring-cloud-network
     depends_on:
@@ -83,9 +91,19 @@ services:
     depends_on:
       - eureka-server
 
+  user-registration:
+    build: ./user-registration
+    container_name: user-registration
+    networks:
+      - spring-cloud-network
+    environment:
+      - DB_NAME=postgres
+      - DB_PASSWORD=secretaryship
+      - DB_URL=postgres
+      - DB_PORT=5432
+    depends_on:
+      - eureka-server
+
 networks:
   spring-cloud-network:
     driver: bridge
-
-
-

@@ -9,3 +9,5 @@ include 'config-server'
 include 'dynamic-config-change'
 include 'security:in-memory-user-security'
 include 'security:jdbc-user-security'
+include 'user-registration'
+

@@ -7,6 +7,7 @@ import org.springframework.security.authentication.ReactiveAuthenticationManager
 import org.springframework.security.authentication.UserDetailsRepositoryReactiveAuthenticationManager;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.server.SecurityWebFilterChain;
@@ -21,8 +22,10 @@ public class JdbcUserSecurityAdapter {
     @Bean
     public SecurityWebFilterChain filterChain(ServerHttpSecurity http) {
         return http
+                .csrf().disable().cors().disable()
                 .authorizeExchange()
-                .pathMatchers("/student-service/**").authenticated()
+                .pathMatchers("/user-registration/**").permitAll()
+                .pathMatchers("/student-service/**", "/school-library-service/**").authenticated()
                 .and()
                 .authorizeExchange().anyExchange().permitAll().and()
                 .httpBasic().and()
@@ -32,14 +35,15 @@ public class JdbcUserSecurityAdapter {
     @Bean
     ReactiveAuthenticationManager reactiveAuthenticationManager(UserDetailsService userDetailsService) {
         var manager = new UserDetailsRepositoryReactiveAuthenticationManager(userDetailsService);
-        manager.setPasswordEncoder(passowrdEncorder());
+        manager.setPasswordEncoder(passwordEncoder());
         return manager;
     }
 
 
     @Bean
-    public PasswordEncoder passowrdEncorder() {
-        return NoOpPasswordEncoder.getInstance();
+    public PasswordEncoder passwordEncoder() {
+//        return NoOpPasswordEncoder.getInstance();
+        return new BCryptPasswordEncoder();
     }
 
 }

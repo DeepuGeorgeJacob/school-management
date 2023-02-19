@@ -1,7 +1,7 @@
 #!/bin/sh
 
 docker run -d \
-	--name postres \
+	--name postgres \
 	-e POSTGRES_PASSWORD=secretaryship \
 	-e PGDATA=/var/lib/postgresql/data/pgdata \
 	-v /Users/deepugeorgejacob/projects/school-management:/var/lib/postgresql/data \

@@ -14,3 +14,6 @@ chmod +x build_scheduler.sh
 
 chmod +x build_school_library.sh
 ./build_school_library.sh
+
+chmod +x build_user_registartion.sh
+./build_user_registartion.sh
