@@ -13,8 +13,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class BookService {
 
-    @Autowired
     private BookRepository bookRepository;
+
+
+    @Autowired
+    private BookService(final BookRepository bookRepository) {
+        this.bookRepository = bookRepository;
+    }
 
     public ApiResponse<BookDto> saveBook(final BookRequest bookRequest) {
         final BookId bookId = new BookId();

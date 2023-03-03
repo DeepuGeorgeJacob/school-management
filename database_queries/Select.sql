@@ -84,9 +84,24 @@
 -- -- Nothing return
 -- SELECT * FROM payment WHERE payment_date BETWEEN '2007-02-14' AND '2007-02-01'
 
+-- IN
 
+-- syntax
+-- VALUE IN (option1,option1)
 
+-- Example
 
+-- SELECT color FROM table WHERE color IN ('Red','Blue')
+
+-- SELECT DISTINCT(amount) FROM payment;
+
+-- SELECT * FROM payment WHERE amount in (0.99,1.98,1.99)
+
+-- SELECT * FROM payment WHERE amount NOT IN (0.99,1.98,1.99)
+
+-- Question
+
+-- SELECT * FROM customer WHERE first_name IN ('John','Jack','Julie')
 
 
 

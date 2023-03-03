@@ -16,8 +16,12 @@ import java.util.stream.Collectors;
 
 @Service
 public class PerformanceService {
-    @Autowired
-    private PerformanceRepository performanceRepository;
+
+    private final PerformanceRepository performanceRepository;
+
+    private PerformanceService(final PerformanceRepository performanceRepository) {
+        this.performanceRepository = performanceRepository;
+    }
 
     public ApiResponse<List<PerformanceDto>> getStudentPerformance() {
         var result = performanceRepository.findAll().parallelStream().map(
@@ -39,8 +43,8 @@ public class PerformanceService {
 
     @Transactional
     public ApiResponse<Boolean> saveOrUpdatePerformance(final PerformanceRequest performanceRequest) {
-        if(performanceRequest.getPerformanceId() == null) {
-           insertPerformanceData(performanceRequest);
+        if (performanceRequest.getPerformanceId() == null) {
+            insertPerformanceData(performanceRequest);
         } else {
             final Optional<Performance> performanceOptional = performanceRepository.findById(performanceRequest.getPerformanceId());
             if (performanceOptional.isPresent()) {
