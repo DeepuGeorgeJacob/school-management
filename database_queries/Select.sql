@@ -95,7 +95,7 @@
 
 -- SELECT DISTINCT(amount) FROM payment;
 
--- SELECT * FROM payment WHERE amount in (0.99,1.98,1.99)
+-- SELECT * FROM payment WHERE amount IN (0.99,1.98,1.99)
 
 -- SELECT * FROM payment WHERE amount NOT IN (0.99,1.98,1.99)
 
@@ -104,6 +104,34 @@
 -- SELECT * FROM customer WHERE first_name IN ('John','Jack','Julie')
 
 
+-- SELECT * FROM rental 
+-- 	WHERE 
+-- 	DATE_PART('year',rental_date) = 2005
+-- 	AND  DATE_PART('month',rental_date) = 6
+-- 	AND (DATE_PART('day',rental_date) = 14
+-- 	OR DATE_PART('day',rental_date) = 26)
 
+
+-- LIKE and ILIKE
+
+-- SELECT * FROM customer WHERE first_name LIKE 'Sa%'
+
+-- SELECT * FROM customer WHERE first_name LIKE 'J%' and last_name LIKE 'A%'
+
+-- SELECT * FROM customer WHERE first_name ILIKE 'j%' and last_name ILIKE 'a%'
+
+-- SELECT * FROM customer WHERE first_name LIKE '%er'
+
+-- SELECT * FROM customer WHERE first_name LIKE '%her%'
+
+-- % is for any char
+
+-- SELECT * FROM customer WHERE first_name LIKE '__er%'
+
+-- '__' number fo charecter before the search text
+
+-- NOT LIKE
+
+-- SELECT * FROM customer WHERE first_name NOT LIKE '%her%'
 
 
