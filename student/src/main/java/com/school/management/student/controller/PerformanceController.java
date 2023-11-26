@@ -15,8 +15,12 @@ import java.util.List;
 @RequestMapping(value = "/api/students/performance")
 public class PerformanceController {
 
-    @Autowired
     private PerformanceService performanceService;
+
+    @Autowired
+    public PerformanceController(final PerformanceService performanceService) {
+        this.performanceService = performanceService;
+    }
 
     @GetMapping(produces = {
             MediaType.APPLICATION_JSON_VALUE,

@@ -19,7 +19,8 @@ public class PerformanceService {
 
     private final PerformanceRepository performanceRepository;
 
-    private PerformanceService(final PerformanceRepository performanceRepository) {
+    @Autowired
+    public PerformanceService(final PerformanceRepository performanceRepository) {
         this.performanceRepository = performanceRepository;
     }
 

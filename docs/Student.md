@@ -1,3 +1,10 @@
+### (Update 26-Nov-2023)
+Swagger implementation is started. Access the url to get Student Service
+
+http://localhost:4000/swagger-ui/index.html#/
+
+
+
 ### 1. Post(Save) student entry.
 
 URL-> http://localhost:3000/api/students
