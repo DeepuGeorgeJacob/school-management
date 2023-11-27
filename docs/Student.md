@@ -2,6 +2,7 @@
 Swagger implementation is started. Access the url to get Student Service
 
 http://localhost:4000/swagger-ui/index.html#/
+http://localhost:9090/webjars/swagger-ui/index.html
 
 
 
