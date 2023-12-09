@@ -22,11 +22,17 @@ import java.util.stream.Collectors;
 @Service
 public class StudentService {
     private static final Logger logger = LoggerFactory.getLogger(StudentService.class);
-    @Autowired
-    private StudentRepository studentRepository;
+
+    private final StudentRepository studentRepository;
+
+    private final CourseRepository courseRepository;
 
     @Autowired
-    private CourseRepository courseRepository;
+    public StudentService(final StudentRepository studentRepository, final CourseRepository courseRepository) {
+        this.studentRepository = studentRepository;
+        this.courseRepository = courseRepository;
+
+    }
 
     public ApiResponse<List<StudentDto>> getStudents() {
         return ApiResponse.<List<StudentDto>>builder().data(studentRepository.findAll().stream().map(

@@ -14,8 +14,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "/api/book")
 public class BookController {
-    @Autowired
+
     private BookService bookService;
+
+    @Autowired
+    public BookController(final BookService bookService) {
+        this.bookService = bookService;
+    }
 
     @PostMapping(produces = {
             MediaType.APPLICATION_JSON_VALUE,

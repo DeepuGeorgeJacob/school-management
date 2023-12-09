@@ -15,7 +15,7 @@ import java.util.List;
 @RequestMapping(value = "/api/students/performance")
 public class PerformanceController {
 
-    private PerformanceService performanceService;
+    private final PerformanceService performanceService;
 
     @Autowired
     public PerformanceController(final PerformanceService performanceService) {

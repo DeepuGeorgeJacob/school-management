@@ -15,8 +15,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/student/details")
 public class StudentDetailsController {
 
+    private final StudentDetailsService studentDetailsService;
+
+
     @Autowired
-    private StudentDetailsService studentDetailsService;
+    public StudentDetailsController(final StudentDetailsService studentDetailsService) {
+        this.studentDetailsService = studentDetailsService;
+    }
 
     @PutMapping(
             produces = {

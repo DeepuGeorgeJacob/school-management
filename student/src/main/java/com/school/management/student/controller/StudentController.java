@@ -17,8 +17,12 @@ import java.util.Map;
 @RequestMapping(value = "/api/students")
 public class StudentController {
 
+    private final StudentService studentService;
+
     @Autowired
-    private StudentService studentService;
+    public StudentController(final StudentService studentService) {
+        this.studentService = studentService;
+    }
 
     @GetMapping(produces = {
             MediaType.APPLICATION_JSON_VALUE,

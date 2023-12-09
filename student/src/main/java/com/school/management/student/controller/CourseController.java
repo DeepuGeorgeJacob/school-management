@@ -13,8 +13,13 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/course")
 public class CourseController {
-    @Autowired
+
     private CourseService courseService;
+
+    @Autowired
+    public CourseController(final CourseService courseService) {
+        this.courseService = courseService
+    }
 
     @PostMapping(produces = {
             MediaType.APPLICATION_JSON_VALUE,
