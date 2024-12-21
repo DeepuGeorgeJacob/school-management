@@ -1,0 +1,27 @@
+services:
+  postgresSql17:
+    image: postgres:17.2-alpine
+    container_name: postgres
+    environment:
+      - POSTGRES_PASSWORD=secretaryship
+      - POSTGRES_USER=admin
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    volumes:
+      - /Users/deepugeorgejacob/projects/school-management:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - pg_network
+  pg_admin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@example.com
+      - PGADMIN_DEFAULT_PASSWORD=secretaryship
+    ports:
+      - "80:80"
+    networks:
+      - pg_network
+networks:
+  pg_network:
+    driver: bridge

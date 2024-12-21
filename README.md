@@ -1,3 +1,4 @@
+
 ## Visual representation
 [Angular UI](https://github.com/DeepuGeorgeJacob/school-management-angular)
 
